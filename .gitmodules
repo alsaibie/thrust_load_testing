@@ -1,0 +1,3 @@
+[submodule "pc_thruster_load_test/libserial"]
+	path = pc_thruster_load_test/libserial
+	url = https://github.com/crayzeewulf/libserial.git
