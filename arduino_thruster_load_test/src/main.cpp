@@ -47,6 +47,17 @@ enum COMMANDS {
     STOP
 };
 
+void arm_esc(Servo & servo){
+  int throttle = map(50, 0, 100, 0, 179);
+  servo.write(throttle);
+  delay(2000);
+}
+
+void disarm_esc(Servo & servo){
+  int throttle = map(0, 0, 100, 0, 179);
+  servo.write(throttle);
+  delay(500);
+}
 /* Generate a ramp between -100 and 100: 0 to 100, 100 to -100, -100 to 0 */
 int gen_ramp_value(unsigned int sample, unsigned int no_samples){
   if(sample <= no_samples / 4) {
@@ -119,9 +130,10 @@ void setup() {
     /*Make sure output is disabled if not running test */
 
     if (start_command == 'P') {
-      esc1.write(180 / 2);
+
     }
     if (start_command == 'S' && test_counter < samples_len) {
+      arm_esc(esc1);
       test_counter++;
       /*  Loop through PWM outputs */
       pwm_out = gen_pwm_ramp(test_counter, samples_len);

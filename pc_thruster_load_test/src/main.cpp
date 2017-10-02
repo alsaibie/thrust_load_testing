@@ -42,7 +42,7 @@ int main()
   arduino_interface arduino;
   usleep(2*wait_a_sec);
   bool test_finished = false;
-  unsigned int number_of_samples = 10;
+  unsigned int number_of_samples = 180;
   json msgJson;
   msgJson["Event"] = "Command";
   msgJson["StartCommand"] = 'S';
@@ -63,8 +63,7 @@ int main()
 
     usleep(wait_a_sec);
     string incomingString;
-    //auto measurement = myscale.get_measurement();
-    int measurement = 1;
+    auto measurement = myscale.get_measurement();
     if(arduino.receive_string(incomingString) && incomingString !="") {
       cout<<"incoming: " << incomingString <<endl;
       auto msgJsonIncoming = json::parse(incomingString);
